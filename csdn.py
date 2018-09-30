@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 from download import Download
 from bs4 import BeautifulSoup
+import Queue
+
+
+
 
 # 访问首页
 # 获取所有专题
@@ -20,6 +24,7 @@ class CSDN(object):
 		self.catetories = []
 
 		self.blog_user = []
+		self.queue = Queue.Queue()
 		pass
 
 	def visit_home(self):
@@ -60,6 +65,8 @@ class CSDN(object):
 			for dd in dds:
 				href = dd.find('a').attrs['href']
 				self.blog_user.append(href)
+				self.queue.put(href)
+
 
 	def start(self):
 		html = self.visit_home()
@@ -67,6 +74,15 @@ class CSDN(object):
 		# html = ''
 		self.parse_category(html)
 		self.visit_category()
+
+		i = 0
+		while not self.queue.empty():
+			blog = self.queue.get()
+			# 下载博客文章
+
+			i += 1
+			pass
+		print 'run times ', i
 
 
 if __name__ == '__main__':

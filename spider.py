@@ -45,6 +45,12 @@ class Spider(object):
 				print '第{:d}页文章为空'.format(self.page_index)
 				break
 
+			# TODO 解析出其他的博客地址
+			# 要访问文章，才有推荐的博客
+			pass
+
+
+			# TODO 解析当前博客的文章
 			self.load_article(content)
 			for article in self.articles:
 				self.save(article)

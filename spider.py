@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 from bs4 import BeautifulSoup
+import time
 
 
 class CSDNArticle(object):
@@ -32,7 +33,8 @@ class Spider(object):
 		pass
 
 	def start(self):
-		print '爬虫开始运行...'
+		start_time = time.time()
+		print '爬虫开始运行...', start_time
 		while True:
 			print '\n获取第{:d}页文章'.format(self.page_index)
 			url = self.url.format(self.page_index)
@@ -50,7 +52,10 @@ class Spider(object):
 			self.articles = []
 
 			self.next_page()
-		print '爬虫运行结束.'
+
+		end_time = time.time()
+		print '爬虫运行结束.', end_time
+		print 'Total use time : ', (end_time - start_time)
 
 
 	def is_empty(self, content):
@@ -81,7 +86,7 @@ class Spider(object):
 				read_count = span_list[1].text.split(u'：')[1]
 				# print url, title
 				# print post_date, read_count
-				print '-' * 40
+				# print '-' * 40
 				article = CSDNArticle(url, title, post_date, read_count)
 				self.articles.append(article)
 

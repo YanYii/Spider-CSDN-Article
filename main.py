@@ -8,13 +8,19 @@ config = ('localhost', 'root', '123456', 'spider')
 
 
 def main():
-	print 'Running.'
-	url = 'https://blog.csdn.net/GitChat'
+	# print 'Running.'
+	# url = 'https://blog.csdn.net/GitChat'
+	# download = Download()
+	# articledb = ArticleDB(DB(*config))
+	# spider = Spider(url, download, articledb)
+	# spider.start()
+	# print 'Done.'
+
+	# index
+	url = 'https://blog.csdn.net/'
 	download = Download()
-	articledb = ArticleDB(DB(*config))
-	spider = Spider(url, download, articledb)
-	spider.start()
-	print 'Done.'
+	html = download.down_html(url, save=True)
+	print html
 
 
 if __name__ == '__main__':

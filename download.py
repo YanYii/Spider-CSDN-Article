@@ -12,11 +12,20 @@ class Download(object):
 			'User-Agent' : user_agent
 		}
 
-	def down_html(self, url):
-		request = urllib2.Request(url, headers=self.headers)
-		response = urllib2.urlopen(request)
-		html = response.read()
-		return html
+	def down_html(self, url, save=False):
+		try:
+			print 'visit {}'.format(url)
+			request = urllib2.Request(url, headers=self.headers)
+			response = urllib2.urlopen(request)
+			html = response.read()
+			if save:
+				with open('tmp.html', 'w') as f:
+					f.write(html) 
+			return html
+		except urllib2.HTTPError, e:
+			print '爬虫链接 {} 出错'.format(url)
+			print e.code
+			print e.reason
 
 	def down_image(self, url):
 		pass
